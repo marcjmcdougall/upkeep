@@ -40,4 +40,7 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+
+   <access origin="tel:*" launch-external="yes" />
+  <access origin="mailto:*" launch-external="yes" />
 </widget>
