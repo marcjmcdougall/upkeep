@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function($scope, $cordovaSms) {
   $scope.contacts = [
     { name: 'John Sawyer', id: 1 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
     { name: 'Mary Atkins', id: 2, picture: './img/face.png', rapport: 2, phone: '4073467303'},
@@ -56,7 +56,34 @@ angular.module('starter.controllers', [])
     { name: 'Wayne Forrest', id: 5, picture: './img/face.png', rapport: 2, phone: '4073467303'},
     { name: 'Allie Murphy', id: 6, picture: './img/face.png', rapport: 1, phone: '4073467303'}
   ];
+
+  $scope.sendSMS = function(number, message){
+
+    // Check to ensure that the device is ready...
+    document.addEventListener("deviceready", function () {
+      
+      var options = {
+
+        // Use the native Android SMS app.
+        android: { intent: 'INTENT' }      
+      };
+
+      $cordovaSms.send(number, message, options).then(function() {
+
+        // Success! Update rapport.
+
+      }, function(error) {
+
+        // Handle the error.  Currently, we just log it.
+        console.log(error);
+      });
+
+    });
+    
+  }
+
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+
 });

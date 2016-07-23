@@ -13,7 +13,7 @@
         	<ul class="contact-options">
 
         		<a href="tel:{{contact.phone}}"><li><i class="ion-ios-telephone-outline"></i></li></a>
-        		<li><i class="ion-android-textsms"></i></li>
+        		<li ng-click="sendSMS(contact.phone, '')"><i class="ion-android-textsms"></i></li>
         		<li><i class="ion-ios-email-outline"></i></li>
         		<li><i class="ion-ios-more"></i></li>
         		
