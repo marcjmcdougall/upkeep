@@ -1,0 +1,27 @@
+<ion-view view-title="Contacts">
+  <ion-content>
+    <ion-list>
+      <ion-item class="contact" ng-repeat="contact in contacts">
+      	<a href="#/app/contacts/{{contact.id}}"><img src="{{contact.picture}}"></a>
+
+      	<div class="contact-content">
+
+        	<h2><strong>{{contact.name}}</strong></h2>
+        	<p>Rapport: {{contact.rapport}}</p>
+
+
+        	<ul class="contact-options">
+
+        		<a href="tel:{{contact.phone}}"><li><i class="ion-ios-telephone-outline"></i></li></a>
+        		<li><i class="ion-android-textsms"></i></li>
+        		<li><i class="ion-ios-email-outline"></i></li>
+        		<li><i class="ion-ios-more"></i></li>
+        		
+        	</ul>
+
+        </div>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

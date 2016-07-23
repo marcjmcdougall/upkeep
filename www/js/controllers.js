@@ -42,13 +42,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+  $scope.contacts = [
+    { name: 'John Sawyer', id: 1 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
+    { name: 'Mary Atkins', id: 2, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Susan Thomas', id: 3, picture: './img/face.png', rapport: 9, phone: '4073467303'},
+    { name: 'John Summers', id: 4, picture: './img/face.png', rapport: 8, phone: '4073467303'},
+    { name: 'Wayne Forrest', id: 5, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Allie Murphy', id: 6, picture: './img/face.png', rapport: 1, phone: '4073467303'},
+    { name: 'John Sawyer', id: 1 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
+    { name: 'Mary Atkins', id: 2, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Susan Thomas', id: 3, picture: './img/face.png', rapport: 9, phone: '4073467303'},
+    { name: 'John Summers', id: 4, picture: './img/face.png', rapport: 8, phone: '4073467303'},
+    { name: 'Wayne Forrest', id: 5, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Allie Murphy', id: 6, picture: './img/face.png', rapport: 1, phone: '4073467303'}
   ];
 })
 

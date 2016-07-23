@@ -1,1 +1,63 @@
 /* Empty. Add your own CSS if you like */
+
+/*
+
+Contacts List
+
+*/
+
+
+.contact{
+
+	height: 140px;
+}
+
+.contact img{
+
+	width: 50px;
+	height: 50px;
+}
+
+.contact .contact-content{
+
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	margin:20px;
+}
+
+.contact-content, .contact-options{
+
+	width: 85%;
+}
+
+.contact-options{
+
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.contact-options, .contact-options li{
+
+	list-style-type: none;
+	float:left;
+}
+
+.contact-options li{
+
+	/*width: 40px;*/
+	height: 40px;
+	width: 25%;
+
+	text-align: center;	
+}
+
+.contact-options li i{
+
+	width: 50px;
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 40px;
+	border: 1px solid gray;
+	border-radius: 50%;
+}
