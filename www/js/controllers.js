@@ -43,25 +43,27 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('PlaylistsCtrl', function($scope, $cordovaSms) {
   $scope.contacts = [
-    { name: 'John Sawyer', id: 1 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
-    { name: 'Mary Atkins', id: 2, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Susan Thomas', id: 3, picture: './img/face.png', rapport: 9, phone: '4073467303'},
-    { name: 'John Summers', id: 4, picture: './img/face.png', rapport: 8, phone: '4073467303'},
-    { name: 'Wayne Forrest', id: 5, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Allie Murphy', id: 6, picture: './img/face.png', rapport: 1, phone: '4073467303'},
-    { name: 'John Sawyer', id: 1 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
-    { name: 'Mary Atkins', id: 2, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Susan Thomas', id: 3, picture: './img/face.png', rapport: 9, phone: '4073467303'},
-    { name: 'John Summers', id: 4, picture: './img/face.png', rapport: 8, phone: '4073467303'},
-    { name: 'Wayne Forrest', id: 5, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Allie Murphy', id: 6, picture: './img/face.png', rapport: 1, phone: '4073467303'}
+    { name: 'John Sawyer', id: 0 , picture: './img/face.png', rapport: 5, phone: '+14073467303'},
+    { name: 'Mary Atkins', id: 1, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Susan Thomas', id: 2, picture: './img/face.png', rapport: 9, phone: '4073467303'},
+    { name: 'John Summers', id: 3, picture: './img/face.png', rapport: 8, phone: '4073467303'},
+    { name: 'Wayne Forrest', id: 4, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Allie Murphy', id: 5, picture: './img/face.png', rapport: 1, phone: '4073467303'},
+    { name: 'John Sawyer', id: 6 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
+    { name: 'Mary Atkins', id: 7, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Susan Thomas', id: 8, picture: './img/face.png', rapport: 9, phone: '4073467303'},
+    { name: 'John Summers', id: 9, picture: './img/face.png', rapport: 8, phone: '4073467303'},
+    { name: 'Wayne Forrest', id: 10, picture: './img/face.png', rapport: 2, phone: '4073467303'},
+    { name: 'Allie Murphy', id: 11, picture: './img/face.png', rapport: 1, phone: '4073467303'}
   ];
 
-  $scope.sendSMS = function(number, message){
+  $scope.sendSMS = function(id, number, message){
 
     // Check to ensure that the device is ready...
     document.addEventListener("deviceready", function () {
       
+      console.log(message);
+
       var options = {
 
         // Use the native Android SMS app.
@@ -71,6 +73,7 @@ angular.module('starter.controllers', ['ngCordova'])
       $cordovaSms.send(number, message, options).then(function() {
 
         // Success! Update rapport.
+        $scope.contacts[id].rapport++;
 
       }, function(error) {
 
@@ -79,7 +82,12 @@ angular.module('starter.controllers', ['ngCordova'])
       });
 
     });
-    
+
+  };
+
+  $scope.notify = function(message){
+
+    console.log(message);
   }
 
 })

@@ -2,7 +2,7 @@
   <ion-content>
     <ion-list>
       <ion-item class="contact" ng-repeat="contact in contacts">
-      	<a href="#/app/contacts/{{contact.id}}"><img src="{{contact.picture}}"></a>
+      	<a href="#/app/contacts/{{contact.id}}"><img ng-src="{{contact.picture}}"></a>
 
       	<div class="contact-content">
 
@@ -12,8 +12,8 @@
 
         	<ul class="contact-options">
 
-        		<a href="tel:{{contact.phone}}"><li><i class="ion-ios-telephone-outline"></i></li></a>
-        		<li ng-click="sendSMS(contact.phone, '')"><i class="ion-android-textsms"></i></li>
+        		<a ng-href="tel:{{contact.phone}}" ng-click="notify('Clicked!')"><li><i class="ion-ios-telephone-outline"></i></li></a>
+        		<li ng-click="sendSMS(contact.id, contact.phone, '')"><i class="ion-android-textsms"></i></li>
         		<li><i class="ion-ios-email-outline"></i></li>
         		<li><i class="ion-ios-more"></i></li>
         		
