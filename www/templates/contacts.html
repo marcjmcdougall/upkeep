@@ -4,8 +4,12 @@
     <a ng-href="#/app/new" class="button button-icon icon ion-plus"></a>
   </ion-nav-buttons>
 
+  <ion-nav-buttons side="secondary">
+    <a class="button button-icon icon ion-person-stalker" ng-click="addFiveNewUsers()"></a>
+  </ion-nav-buttons>
+
   <ion-content>
-    <ion-list>
+    <ion-list can-swipe="true">
       <ion-item class="contact" ng-repeat="contact in contacts">
       	<a href="#/app/contacts/{{contact.id}}"><img ng-src="{{contact.picture}}"></a>
         
@@ -19,11 +23,13 @@
         		<a ng-href="tel:{{contact.phone}}" ng-click="notify('Clicked!')"><li><i class="ion-ios-telephone-outline"></i></li></a>
         		<li ng-click="sendSMS(contact.id, contact.phone, '')"><i class="ion-android-textsms"></i></li>
         		<a ng-href="mailto:{{contact.email}}"><li><i class="ion-ios-email-outline"></i></li></a>
-        		<li><i class="ion-ios-more"></i></li>
-        		
+        		<li><i class="ion-ios-more"></i></li>        		
+            
         	</ul>
 
-        </div>
+        </div>      
+
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="removeContact(contact.id)"></ion-option-button>             
 
       </ion-item>
     </ion-list>

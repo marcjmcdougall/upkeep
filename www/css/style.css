@@ -21,9 +21,9 @@ Contacts List
 .contact .contact-content{
 
 	display: inline-block;
-	position: absolute;
+	/*position: relative;*/
 	top: 0px;
-	margin:20px;
+	margin-left:20px;
 }
 
 .contact a{

@@ -44,6 +44,7 @@ angular.module('starter.controllers', ['ngCordova'])
 .controller('ContactsCtrl', function($scope, $cordovaSms, contacts) {
   
   $scope.contacts = contacts.list;
+  $scope.listCanSwipe = true;
 
   $scope.sendSMS = function(id, number, message){
 
@@ -70,12 +71,27 @@ angular.module('starter.controllers', ['ngCordova'])
       });
 
     });
+  }
 
-  };
+  $scope.removeContact = function(id){
+
+    console.log('Removing contact: ' + id + ' now.');
+    contacts.remove(id);
+  }
 
   $scope.notify = function(message){
 
     console.log(message);
+  }
+
+  $scope.addFiveNewUsers = function(){
+
+    contacts.add('James', 'james@gmail.com', '4073467303', 'James is a cool guy.');
+    contacts.add('Paul', 'paul@gmail.com', '4073333333', 'Paul is a cool guy.');
+    contacts.add('Rupert', 'rupert@gmail.com', '4074444444', 'Rupert is a cool guy.');
+    contacts.add('Sammy', 'sammy@gmail.com', '4076666666', 'Sammy is a cool girl.');
+    contacts.add('Lexi', 'lexi@gmail.com', '4075555555', 'Lexi is a cool girl.');
+
   }
 
 })
@@ -121,7 +137,9 @@ angular.module('starter.controllers', ['ngCordova'])
 
   contacts.add = function(name, email, phone, note){
 
-    contacts.list.push({id: contacts.list.length, name: name, email: email, phone: phone, note: note, rapport: 0});
+    // Generates the new contact.  Note that the id consists of a mashup between
+    // simply the users phone number and a random number between 1 and 1,000,000.
+    contacts.list.push({id: phone + '-' + Math.floor((Math.random() * 1000000) + 1), name: name, email: email, phone: phone, note: note, rapport: 0});
 
     contacts.save();
   };
@@ -143,7 +161,16 @@ angular.module('starter.controllers', ['ngCordova'])
 
   contacts.remove = function(id){
 
-    contacts.remove(id);
+    for(var i = 0; i < contacts.list.length; i++){
+
+      // console.log('Comparing ' + id + ' to ' + contacts.get(i).id + '\n================');
+
+      if(contacts.get(i).id === id){
+
+        contacts.list.splice(i, 1);
+        break;
+      }
+    }
 
     contacts.save();
   }
