@@ -2,6 +2,39 @@
 
 /*
 
+Global
+
+*/
+.bar{
+
+	height: 75px;
+	padding-top: 20px;
+}
+
+.bar .title{
+
+	position: absolute;
+	top: 18px;
+}
+
+.bar .title .buttons{
+
+	top: 15px;
+	height: 30px;
+}
+
+.bar .buttons a{
+
+	padding-top: 15px;
+}
+
+ion-content.scroll-content{
+
+	margin-top: 25px;
+}
+
+/*
+
 Contacts List
 
 */
