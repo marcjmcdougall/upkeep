@@ -41,21 +41,9 @@ angular.module('starter.controllers', ['ngCordova'])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope, $cordovaSms) {
-  $scope.contacts = [
-    { name: 'John Sawyer', id: 0 , picture: './img/face.png', rapport: 5, phone: '+14073467303'},
-    { name: 'Mary Atkins', id: 1, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Susan Thomas', id: 2, picture: './img/face.png', rapport: 9, phone: '4073467303'},
-    { name: 'John Summers', id: 3, picture: './img/face.png', rapport: 8, phone: '4073467303'},
-    { name: 'Wayne Forrest', id: 4, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Allie Murphy', id: 5, picture: './img/face.png', rapport: 1, phone: '4073467303'},
-    { name: 'John Sawyer', id: 6 , picture: './img/face.png', rapport: 5, phone: '4073467303'},
-    { name: 'Mary Atkins', id: 7, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Susan Thomas', id: 8, picture: './img/face.png', rapport: 9, phone: '4073467303'},
-    { name: 'John Summers', id: 9, picture: './img/face.png', rapport: 8, phone: '4073467303'},
-    { name: 'Wayne Forrest', id: 10, picture: './img/face.png', rapport: 2, phone: '4073467303'},
-    { name: 'Allie Murphy', id: 11, picture: './img/face.png', rapport: 1, phone: '4073467303'}
-  ];
+.controller('ContactsCtrl', function($scope, $cordovaSms, contacts) {
+  
+  $scope.contacts = contacts.list;
 
   $scope.sendSMS = function(id, number, message){
 
@@ -94,4 +82,76 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 
-});
+
+})
+
+.controller('NewCtrl', function($scope, $state, $ionicHistory, contacts){
+
+  $scope.contactName = '';
+  $scope.contactEmail = '';
+  $scope.contactPhone = '';
+  $scope.contactNote = '';
+
+  $scope.tryAddNewContact = function(name, email, phone, note){
+
+    contacts.add(name, email, phone, note);
+
+    $ionicHistory.nextViewOptions({
+
+      disableBack: true
+    });
+
+    $state.go('app.contacts');
+  }
+
+ })
+
+ .factory('contacts', function(){
+
+  var contacts = {};
+
+  if(window.localStorage['contacts']){
+
+    contacts = angular.fromJson(window.localStorage['contacts']);
+  }
+  else{
+
+    contacts.list = [];
+  }
+
+  contacts.add = function(name, email, phone, note){
+
+    contacts.list.push({id: contacts.list.length, name: name, email: email, phone: phone, note: note, rapport: 0});
+
+    contacts.save();
+  };
+
+  contacts.get = function(id){
+
+    return contacts.list[id];
+  }
+
+  contacts.update = function(id, name, email, phone, note){
+
+    contacts[id].name = name;
+    contacts[id].email = email;
+    contacts[id].phone = phone;
+    contacts[id].note = note;  
+
+    contacts.save();  
+  }
+
+  contacts.remove = function(id){
+
+    contacts.remove(id);
+
+    contacts.save();
+  }
+
+  contacts.save = function(){
+
+    window.localStorage['contacts'] = angular.toJson(contacts);
+  }
+
+  return contacts;
+ });

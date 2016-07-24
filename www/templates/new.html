@@ -1,0 +1,39 @@
+<ion-view view-title="Add New Contact">
+
+  <ion-content>
+
+    <div id="new-contact" class="list list-inset">
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input ng-required="true" ng-model="contactName" type="text" placeholder="Jane">
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Email</span>
+        <input ng-required="true" ng-model="contactEmail" type="email" placeholder="jane@mail.com">
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Phone</span>
+        <input ng-required="true" ng-model="contactPhone" type="number" placeholder="+1(234) 567-8910">
+      </label>
+
+       <label class="item item-input item-stacked-label">
+        <span class="input-label">Notes</span>
+        <textarea ng-model="contactNote" placeholder="What does this person like to do?"></textarea>
+      </label>
+
+    </div>
+
+    <div class="padding">
+      <button ng-click="tryAddNewContact(contactName, contactEmail, contactPhone, contactNote)" class="button button-block button-positive">Submit</button>
+
+     <!--  <p>Name: {{contactName}}</p>
+      <p>Email: {{contactEmail}}</p>
+      <p>Phone: {{contactPhone}}</p>
+      <p>Note: {{contactNote}}</p> -->
+    </div>
+
+  </ion-content>
+</ion-view>

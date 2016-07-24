@@ -26,6 +26,11 @@ Contacts List
 	margin:20px;
 }
 
+.contact a{
+
+	color: #000; 
+}
+
 .contact-content, .contact-options{
 
 	width: 85%;
@@ -60,4 +65,16 @@ Contacts List
 	font-size: 40px;
 	border: 1px solid gray;
 	border-radius: 50%;
+}
+
+.contact li i:hover{
+
+	background-color: #1768AC;
+	color:#FFFFFF;
+	border-color: #FFFFFF;
+}
+
+#new-contact textarea{
+
+	min-height: 200px;
 }

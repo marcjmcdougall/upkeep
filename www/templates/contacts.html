@@ -1,20 +1,24 @@
 <ion-view view-title="Contacts">
+
+  <ion-nav-buttons side="primary">
+    <a ng-href="#/app/new" class="button button-icon icon ion-plus"></a>
+  </ion-nav-buttons>
+
   <ion-content>
     <ion-list>
       <ion-item class="contact" ng-repeat="contact in contacts">
       	<a href="#/app/contacts/{{contact.id}}"><img ng-src="{{contact.picture}}"></a>
-
+        
       	<div class="contact-content">
 
         	<h2><strong>{{contact.name}}</strong></h2>
         	<p>Rapport: {{contact.rapport}}</p>
 
-
         	<ul class="contact-options">
 
         		<a ng-href="tel:{{contact.phone}}" ng-click="notify('Clicked!')"><li><i class="ion-ios-telephone-outline"></i></li></a>
         		<li ng-click="sendSMS(contact.id, contact.phone, '')"><i class="ion-android-textsms"></i></li>
-        		<li><i class="ion-ios-email-outline"></i></li>
+        		<a ng-href="mailto:{{contact.email}}"><li><i class="ion-ios-email-outline"></i></li></a>
         		<li><i class="ion-ios-more"></i></li>
         		
         	</ul>
