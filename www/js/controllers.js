@@ -225,7 +225,7 @@ angular.module('starter.controllers', ['ngCordova'])
         console.log('Reducing rapport for ' + contacts.list[i].name + ' to ' + contacts.list[i].rapport - 1);
 
         // Reduce the rapport by one.
-        updateRapport(contacts.list[i].id, contacts.list[i].rapport - 1);
+        // updateRapport(contacts.list[i].id, contacts.list[i].rapport - 1);
       }
     }
   }
