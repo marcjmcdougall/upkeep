@@ -62,7 +62,7 @@ angular.module('starter.controllers', ['ngCordova'])
       $cordovaSms.send(number, message, options).then(function() {
 
         // Success! Update rapport.
-        $scope.contacts[id].rapport++;
+        contacts.incrementRapport(id);
 
       }, function(error) {
 
@@ -92,6 +92,16 @@ angular.module('starter.controllers', ['ngCordova'])
     contacts.add('Sammy', 'sammy@gmail.com', '4076666666', 'Sammy is a cool girl.');
     contacts.add('Lexi', 'lexi@gmail.com', '4075555555', 'Lexi is a cool girl.');
 
+  }
+
+  $scope.incrementRapport = function(id){
+
+    var currentContact = contacts.getfindContactIndexById(id);
+
+    if(currentContact.rapport < 10){
+
+      currentContact.rapport++;
+    }
   }
 
 })
@@ -139,7 +149,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
     // Generates the new contact.  Note that the id consists of a mashup between
     // simply the users phone number and a random number between 1 and 1,000,000.
-    contacts.list.push({id: phone + '-' + Math.floor((Math.random() * 1000000) + 1), name: name, email: email, phone: phone, note: note, rapport: 0});
+    contacts.list.push({id: phone + '-' + Math.floor((Math.random() * 1000000) + 1), name: name, email: email, phone: phone, note: note, rapport: 0, lastContacted: moment.now()});
 
     contacts.save();
   };
@@ -149,28 +159,29 @@ angular.module('starter.controllers', ['ngCordova'])
     return contacts.list[id];
   }
 
-  contacts.update = function(id, name, email, phone, note){
+  contacts.updateDetails = function(id, name, email, phone, note){
 
-    contacts[id].name = name;
-    contacts[id].email = email;
-    contacts[id].phone = phone;
-    contacts[id].note = note;  
+    contacts[findContactIndexById(id)].name = name;
+    contacts[findContactIndexById(id)].email = email;
+    contacts[findContactIndexById(id)].phone = phone;
+    contacts[findContactIndexById(id)].note = note;  
 
     contacts.save();  
   }
 
+  contacts.updateRapport = function(id, rapport){
+
+    contacts[findContactIndexById(id)].rapport = rapport;
+  }
+
+  contacts.updateLastContactTime = function(id, lastContacted){
+
+    contacts[findContactIndexById(id)].lastContacted = lastContacted;
+  }
+
   contacts.remove = function(id){
 
-    for(var i = 0; i < contacts.list.length; i++){
-
-      // console.log('Comparing ' + id + ' to ' + contacts.get(i).id + '\n================');
-
-      if(contacts.get(i).id === id){
-
-        contacts.list.splice(i, 1);
-        break;
-      }
-    }
+    contacts.list.splice(findContactIndexById(id), 1);    
 
     contacts.save();
   }
@@ -178,7 +189,38 @@ angular.module('starter.controllers', ['ngCordova'])
   contacts.save = function(){
 
     window.localStorage['contacts'] = angular.toJson(contacts);
+  }  
+
+  contacts.calculateRapport = function(now){
+
+    for(var i = 0; i < contacts.list.length; i++){
+
+       var nextUpdate = moment(contacts.list[i].lastContacted).add(2, 'day');
+
+       console.log('Calculating rapport for ' + contacts.list[i].name + ' now...')
+
+       if(now >= nextUpdate){
+
+        console.log('Reducing rapport for ' + contacts.list[i].name + ' to ' + contacts.list[i].rapport - 1);
+        // Reduce the rapport by one.
+        updateRapport(contacts.list[i].id, contacts.list[i].rapport - 1);
+      }
+    }
+  }
+
+  contacts.findContactIndexById = function(id){
+
+    for(var i = 0; i < contacts.list.length; i++){
+
+      // console.log('Comparing ' + id + ' to ' + contacts.get(i).id + '\n================');
+
+      if(contacts.get(i).id === id){
+
+        return i;
+      }
+    }
   }
 
   return contacts;
+
  });

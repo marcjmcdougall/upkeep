@@ -10,7 +10,7 @@
 
   <ion-content>
     <ion-list can-swipe="true">
-      <ion-item class="contact" ng-repeat="contact in contacts">
+      <ion-item class="contact item-remove-animate" ng-repeat="contact in contacts">
       	<a href="#/app/contacts/{{contact.id}}"><img ng-src="{{contact.picture}}"></a>
         
       	<div class="contact-content">
@@ -20,11 +20,11 @@
 
         	<ul class="contact-options">
 
-        		<a ng-href="tel:{{contact.phone}}" ng-click="notify('Clicked!')"><li><i class="ion-ios-telephone-outline"></i></li></a>
+        		<a ng-href="tel:{{contact.phone}}" ng-click="incrementRapport(contact.id)"><li><i class="ion-ios-telephone-outline"></i></li></a>
         		<li ng-click="sendSMS(contact.id, contact.phone, '')"><i class="ion-android-textsms"></i></li>
-        		<a ng-href="mailto:{{contact.email}}"><li><i class="ion-ios-email-outline"></i></li></a>
-        		<li><i class="ion-ios-more"></i></li>        		
-            
+        		<a ng-href="mailto:{{contact.email}}" ng-click="incrementRapport(contact.id)"><li><i class="ion-ios-email-outline"></i></li></a>
+        		<li><i class="ion-ios-more" ></i></li>        		
+             
         	</ul>
 
         </div>      
