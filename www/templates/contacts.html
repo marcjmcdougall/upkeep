@@ -23,7 +23,7 @@
         		<a ng-href="tel:{{contact.phone}}" ng-click="incrementRapport(contact.id)"><li><i class="ion-ios-telephone-outline"></i></li></a>
         		<li ng-click="sendSMS(contact.id, contact.phone, '')"><i class="ion-android-textsms"></i></li>
         		<a ng-href="mailto:{{contact.email}}" ng-click="incrementRapport(contact.id)"><li><i class="ion-ios-email-outline"></i></li></a>
-        		<li><i class="ion-ios-more" ></i></li>        		
+        		<li ng-click="moveContactsBackInTime()"><i class="ion-ios-more"></i></li>        		
              
         	</ul>
 

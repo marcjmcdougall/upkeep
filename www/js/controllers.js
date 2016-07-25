@@ -96,12 +96,27 @@ angular.module('starter.controllers', ['ngCordova'])
 
   $scope.incrementRapport = function(id){
 
-    var currentContact = contacts.getfindContactIndexById(id);
+    console.log('Incrementing rapport for ' + contacts.get(contacts.findContactIndexById(id)).name + ' (id: ' + id + ")")
+
+    var currentContact = contacts.get(contacts.findContactIndexById(id));
 
     if(currentContact.rapport < 10){
 
       currentContact.rapport++;
+      contacts.save();
     }
+  }
+
+  $scope.moveContactBackInTime = function(id){
+
+    var currentContact = contacts.get(contacts.findContactIndexById(id));
+
+    var previousTime = currentContact.lastContacted;
+    // Move the last contacted time into the past...
+    var newTime = previousTime.subtract(5, 'day');
+
+    currentContact.lastContacted = newTime;
+    contacts.save();
   }
 
 })
@@ -131,6 +146,8 @@ angular.module('starter.controllers', ['ngCordova'])
   }
 
  })
+
+
 
  .factory('contacts', function(){
 
@@ -172,11 +189,15 @@ angular.module('starter.controllers', ['ngCordova'])
   contacts.updateRapport = function(id, rapport){
 
     contacts[findContactIndexById(id)].rapport = rapport;
+
+    contacts.save();
   }
 
   contacts.updateLastContactTime = function(id, lastContacted){
 
     contacts[findContactIndexById(id)].lastContacted = lastContacted;
+
+    contacts.save();
   }
 
   contacts.remove = function(id){
@@ -197,11 +218,12 @@ angular.module('starter.controllers', ['ngCordova'])
 
        var nextUpdate = moment(contacts.list[i].lastContacted).add(2, 'day');
 
-       console.log('Calculating rapport for ' + contacts.list[i].name + ' now...')
+       console.log('Calculating rapport for ' + contacts.list[i].name + ' now...\nLast Update: ' + contacts.list[i].lastContacted)
 
        if(now >= nextUpdate){
 
         console.log('Reducing rapport for ' + contacts.list[i].name + ' to ' + contacts.list[i].rapport - 1);
+
         // Reduce the rapport by one.
         updateRapport(contacts.list[i].id, contacts.list[i].rapport - 1);
       }
@@ -211,8 +233,6 @@ angular.module('starter.controllers', ['ngCordova'])
   contacts.findContactIndexById = function(id){
 
     for(var i = 0; i < contacts.list.length; i++){
-
-      // console.log('Comparing ' + id + ' to ' + contacts.get(i).id + '\n================');
 
       if(contacts.get(i).id === id){
 
